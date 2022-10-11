@@ -24,6 +24,8 @@ CREATE TABLE Routes(
     Destination varchar(30) NOT NULL,
     Distance int,
     Fare int
+    RouteNo int,
+    PRIMARY KEY (RouteNo)
 );
 
 CREATE TABLE Vehicle(
@@ -33,3 +35,15 @@ CREATE TABLE Vehicle(
     LastService varchar(15),
     PRIMARY KEY (RegNo)
 );
+
+CREATE TABLE Journey{
+    CustomerId int,
+    DriverId int,
+    RouteNo int,
+    RegNo int,
+    FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId),
+    FOREIGN KEY (DriverId) REFERENCES Driver(DriverId),
+    FOREIGN KEY (RouteNo) REFERENCES Routes(RouteNo),
+    FOREIGN KEY (RegNo) REFERENCES Vehicle(RegNo),
+    PRIMARY KEY (CustomerId,DriverId, RouteNo, RegNo)    
+};
